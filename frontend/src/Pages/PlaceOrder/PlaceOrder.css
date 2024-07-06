@@ -38,3 +38,13 @@
 .place-order .cart-total button{
     margin-top: 30px;
 }
+
+.cart-total-option{
+    width: 20vh;
+    gap: 20px;
+    border: 1px solid tomato;
+    cursor: pointer;
+}
+.cart-total-option :hover{
+    background-color: rgb(247, 164, 150);
+}

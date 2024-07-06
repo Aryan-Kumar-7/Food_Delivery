@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 const PlaceOrder = () => {
 
-  const {getTotalCartAmount, token, food_list, cartItems, url} = useContext(StoreContext);
+  const { getTotalCartAmount, token, food_list, cartItems, url } = useContext(StoreContext);
 
   const [data, setData] = useState({
     firstName: "",
@@ -23,15 +23,15 @@ const PlaceOrder = () => {
   const onChangeHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setData(data=>({...data, [name]:value}))
+    setData(data => ({ ...data, [name]: value }))
   }
 
 
   const placeOrder = async (event) => {
     event.preventDefault();
     let orderItems = [];
-    food_list.map((item)=>{
-      if(cartItems[item._id]>0){
+    food_list.map((item) => {
+      if (cartItems[item._id] > 0) {
         let itemInfo = item;
         itemInfo["quantity"] = cartItems[item._id];
         orderItems.push(itemInfo);
@@ -53,17 +53,17 @@ const PlaceOrder = () => {
     // }
 
   }
-  
+
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(!token){
+  useEffect(() => {
+    if (!token) {
       navigate('/cart')
-    }else if(getTotalCartAmount() === 0){
+    } else if (getTotalCartAmount() === 0) {
       navigate('/cart')
     }
-  },[token]);
- 
+  }, [token]);
+
   return (
     <form onSubmit={placeOrder} className='place-order'>
       <div className="place-order-left">
@@ -95,13 +95,18 @@ const PlaceOrder = () => {
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>${getTotalCartAmount()===0?0:2}</p>
+              <p>${getTotalCartAmount() === 0 ? 0 : 2}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <p>${getTotalCartAmount()===0?0:getTotalCartAmount()+2}</p>
+              <p>${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}</p>
             </div>
+          </div>
+          <div className='c-t-o'>
+            <h2>Payment Method</h2>
+            <p className="cart-total-option"><span>&#x25cf; Cash on delivery</span></p>
+            <p className="cart-total-option"><span>&#x25cf; Online Payment</span></p>
           </div>
           <Link to={"/myorders"}><button type='submit' >PROCEED TO PAYMENT</button></Link>
         </div>
